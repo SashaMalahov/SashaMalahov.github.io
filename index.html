@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>First task</title>
+	<script type="text/javascript" src='./constants.js'></script>
+	<script type="text/javascript" src='./news.js'></script>
 </head>
 <body>
  	<h1>News API</h1>
@@ -9,58 +11,12 @@
 		<option>Choose the source.</option>
 	</select>
 
-	<button id='getNews' onclick='getNews()'> find news</button>
+	<button id='getNews' onclick='News.getNewsBySource()'>find news</button>
 
-	<div id= "news"></div>
+	<div id="news"></div>
 
- 	<script type="text/javascript">
-			{
-				const url = 'https://newsapi.org/v1/sources?apiKey=520e1c52ddf34fc0b5791da26a5e3c35';
- 				let request = new Request(url, init = {metod : 'GET'});
- 		
- 				fetch(request)
- 				.then(response => response.json()) 			
- 				.then ((data) => { 		
- 					let newsSourceSelect = document.getElementById('newsSource');
-
- 					data.sources.forEach( source => {		
-					let sourceName = source.id;
- 					let element = document.createElement('option');
- 					element.textContent = sourceName; 				
- 					newsSourceSelect.appendChild(element); 				
- 					});
- 					})
- 				.catch(err => console.log(err));
-			} 		
-
- 		function getNews(){ 			
- 			const url = 'https://newsapi.org/v1/articles?apiKey=520e1c52ddf34fc0b5791da26a5e3c35&source='; 		
-
- 			let newsSourceSelect = document.getElementById('newsSource');
- 			let selectedNewsSource = newsSourceSelect.options[newsSourceSelect.selectedIndex].value;
- 			let request = new Request(url + selectedNewsSource, init = {metod : 'GET'});
- 		
-			let html = '<table  border="1|1">';
-
- 			fetch(request)
- 			.then(response => response.json())
- 			.then ((data)=>{ 	
- 				data.articles.forEach(article =>{				
-
-        		html+='<tr>';
-        		html+='<td>'+ article.title +'</td>';
-        		html+='<td>'+ article.description+'</td>';
-        		html+='<td>'+ article.url+'</td>';        	
-        		html+='</tr>';			
-    							
- 				})
- 				html+='</table>';
- 				document.getElementById('news').innerHTML = html;
- 			})
- 			.catch((err) =>{ 				
- 				document.getElementById('news').innerHTML = "Ooops. Something wrong, try later.";
- 			});
- 			} 		
+ 	<script type="text/javascript"> 					
+ 			News.getNews();			
  	</script>
 </body>
 </html>
