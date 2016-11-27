@@ -1,0 +1,30 @@
+{
+  "name": "newsapi",
+  "version": "1.0.0",
+  "description": "mentoring project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "build": "webpack -webpack.config.js -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SashaMalahov/SashaMalahov.github.io.git"
+  },
+  "author": "amalakhau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SashaMalahov/SashaMalahov.github.io/issues"
+  },
+  "homepage": "https://github.com/SashaMalahov/SashaMalahov.github.io#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "file-loader": "^0.9.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.3"
+  }
+}
