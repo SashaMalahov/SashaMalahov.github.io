@@ -5,6 +5,7 @@ module.exports = {
     entry: './js/models/news.js',
      output: {
          path: './build',
+         publicPath: "./build/",
          filename: 'app.bundle.js',
          libraryTarget: 'var',
     	 library: 'News'
@@ -31,7 +32,7 @@ module.exports = {
 		 query: {
 		 	limit: 10000
 		 }
-		}		
+		}
          ]
      },
 

@@ -1,0 +1,31 @@
+  .news {
+  	   border: 2px solid #99ff99; 
+  	   border-radius: 5px; 
+  	   margin-bottom: 5px;	 	   
+  }
+
+  .newsTitle {
+  	margin: 5px 0px 5px 5px;	
+  	width: 25%;
+  	text-align: justify;
+  	background-color: #99ff99;    
+    color: white; 
+    border-radius: 5px; 
+    padding: 0px 5px 0px 5px;
+    display: inline-block;
+  }
+
+  .newsPublishedDate {
+  	display: inline-block;
+  	float: right;
+  	margin-right: 5px;  	
+  }
+
+  .newsPicture {
+  	margin-left: 5px;  	
+  	overflow: hidden;  	
+  }
+
+  .newsDescription {
+    margin-left: 5px;
+  }

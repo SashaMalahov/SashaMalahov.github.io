@@ -28,7 +28,12 @@
  				.catch(err => console.log(err));
 	}
 
-	getNewsBySource(){ 		 			
+	getNewsBySource(){ 		
+
+			require.ensure([],function(require){
+				const newsCss = require('../../styles/news.css');
+			});
+
  			let newsSourceSelect = document.getElementById('newsSource');
  			let selectedNewsSource = newsSourceSelect.options[newsSourceSelect.selectedIndex].value;
  			let request = new Request(constants.sourceUrl + selectedNewsSource, constants.init ); 		
