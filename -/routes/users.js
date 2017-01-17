@@ -15,7 +15,7 @@ router.post('/', function(req, res, next) {
 	let blogDB = blogConnector.blogConnector;
 	let Articles = blogDB.getArticleModel();
 
-	let newArticle = new Article( { title : req.body.articleTitle, author : req.body.articleAuthor, body : req.body.articleBody, title : req.body.articleTitle, comments : req.body.articleComment});	
+	let newArticle = new Articles( { title : req.body.articleTitle, author : req.body.articleAuthor, body : req.body.articleBody, title : req.body.articleTitle, comments : req.body.articleComment});	
 	newArticle.save(function(err){
 		if (err){
 			res.json({error : err.message});
