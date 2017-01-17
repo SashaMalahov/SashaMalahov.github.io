@@ -6,26 +6,37 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<script type="text/javascript" src='build/app.bundle.js'></script>	
+	<script type="text/javascript" src='build/app.bundle.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 </head>
 <body>
 <div id='newsContainer'>  
   <div id='newsSelection'>
   <h1>This is News API.</h1>
   <div class="newsSelectionElements">
-  	<select id='newsSource'>
-		<option>Choose the source.</option>
-	</select>
-  </div>
-  <div class="newsSelectionElements">
-  	<button id='getNews' onclick='News.prototype.getNewsBySource()'>find news</button>
+    <button id='addArticle' onclick="News.prototype.addArticle()"> Add article.</button>
   </div>
   </div>
-	<div id="newsSection"></div>
-</div> 	
+	<div id='addArticleArea'>
+        <span>Title: </span>
+        <input type="text" id="articleTitle" size="50" />
+        <p/>
+        <span>Author: </span>
+        <input type="text" id="articleAuthor" size="50" />
+        <p/>
+        <span>Article body:</span>
+        <input type="text" id="articleBody" size="50" />
+        <p />
+        <span>Comment:</span>
+        <input type="text" id="articleComment" size="50" />        
+        <p />  
+</div>
+</div>
+
+<div id="newsSection"></div>
  	<script type="text/javascript">  						
     let news = new News();   
-    news.getNews();		
+    news.getNews();	   
  	</script>
 </body>
 </html>

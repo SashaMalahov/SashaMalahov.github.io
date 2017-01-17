@@ -25,68 +25,43 @@
  		});
 	}
 
-	 getNews(){
+	getNews(){	    
+    $.get(constants.usersUrl, function(data){      
+      require.ensure([],function(require){
+        const newsCss = require('../../styles/news.css');
+      });
+     let newsSourceSelect = document.getElementById('newsSource');
+     let html = '';
 
-		let request = new Request(constants.url,constants.init);
- 				
- 				fetch(request)
- 				.then(response => response.json()) 			
- 				.then ((data) => { 		
- 					let newsSourceSelect = document.getElementById('newsSource');
- 					data.sources.forEach( source => { 	
+     $.each(data, function(i, article) {
+        html += '<div class="news"><div class="newsTitle">' + article.title + '</div><div class="newsPublishedDate"> Author: ' + article.author  + '</div><div class="newsDescription">' + article.body +'</div></div>';             
+    })
 
- 					if(ShowArtcileLanguage){
- 						console.log('Language of ' + source.id + ' articles is ' + source.language);
- 					}
+    document.getElementById('newsSection').innerHTML = html;
+    })
 
- 					if(source.category === 'technology'){
-
- 						if(source.language === 'en'){
- 							let englishUser = new user.EnglishUser();
- 							let englishTechnologyUser = englishUser.Create('Alex',this);
- 							this.notifyObserver(source.description)	
- 						}
- 						else if (source.language === 'de'){
- 							let germanUser = new user.GermanUser();
- 							let germanTechnologyUser = germanUser.Create('Gans',this);	
- 							this.notifyObserver(source.description)	
- 						} 						
- 					}
-
-					let sourceName = source.id;
- 					let element = document.createElement('option');
- 					element.value = sourceName;
- 					element.textContent = sourceName; 				
- 					newsSourceSelect.appendChild(element); 				
- 					});
- 					})
- 				.catch(err => console.log(err));
 	}
+ 	 addArticle(){
+        let articleTitle = $('#articleTitle').val();
+        let articleAuthor = $('#articleAuthor').val();
+        let articleBody = $('#articleBody').val();
+        let articleComment = $('#articleComment').val();
 
-	getNewsBySource(){ 		
+        let article = { articleTitle : articleTitle, articleAuthor : articleAuthor, articleBody : articleBody, articleComment : [{ commentBody :articleComment }]}
 
-			require.ensure([],function(require){
-				const newsCss = require('../../styles/news.css');
-			});
-
- 			let newsSourceSelect = document.getElementById('newsSource');
- 			let selectedNewsSource = newsSourceSelect.options[newsSourceSelect.selectedIndex].value;
- 			let request = new Request(constants.sourceUrl + selectedNewsSource, constants.init ); 		
-			let html = '';
-
- 			fetch(request)
- 			.then(response => response.json())
- 			.then ((data)=>{ 	 				
- 				data.articles.forEach(article =>{
- 			    let publishedDate = new Date(article.publishedAt).toLocaleDateString();
- 				html += '<div class="news"><div class="newsTitle">' + article.title + '</div><div class="newsPublishedDate"> Published at: ' + publishedDate  + '</div><div class="newsPicture"><img src="'+ article.urlToImage+'"></div><div class="newsDescription"><a href="'+ article.url +'">' + article.description+'</a></div></div>';			        		    							
- 			}) 			
- 			document.getElementById('newsSection').innerHTML = html;
- 			})
- 			.catch((err) =>{ 				
- 				document.getElementById('newsSection').innerHTML = "Ooops. Something wrong, try later.";
- 			});
- 		} 
+        $.ajax({
+          url : constants.usersUrl,
+          type : 'POST',
+          success : function(data){
+              console.log('article added');
+          },
+          error : function(data){
+              console.log('error');
+          },
+          contentType: "application/json",
+          data : JSON.stringify(article)
+        });
+    }
 	}
 
 module.exports = News;

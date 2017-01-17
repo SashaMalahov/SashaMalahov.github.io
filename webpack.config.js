@@ -2,7 +2,7 @@ const webpack = require('webpack');
 
 module.exports = {
 
-    entry: './js/models/news.js',
+    entry: { news : './js/models/news.js'},
      output: {
          path: './build',
          publicPath: "./build/",
@@ -47,7 +47,7 @@ module.exports = {
         }),
 
         new webpack.DefinePlugin({
-    	ShowArtcileLanguage: true
+    	ShowArtcileLanguage: false
 })
     ],
 
