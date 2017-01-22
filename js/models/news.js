@@ -1,6 +1,12 @@
-	let constants = require('../constants.js');
+  var React = require("react")
+  var ReactDOM = require("react-dom");
+
+  let constants = require('../constants.js');
 	let user = require('./userFactory.js');
 	require('../../styles/styles.css');
+  let ArticlesComponent = require('../reactComponents/ArticleComponent.js');
+  let WelcomeComponent = require('../reactComponents/WelcomeComponent.js');
+  let ArticleTextboxAreaComponent = require('../reactComponents/ArticleTextboxAreaComponent.js');
 
 	class News {
 
@@ -30,14 +36,9 @@
       require.ensure([],function(require){
         const newsCss = require('../../styles/news.css');
       });
-     let newsSourceSelect = document.getElementById('newsSource');
-     let html = '';
-
-     $.each(data, function(i, article) {
-        html += '<div class="news"><div class="newsTitle">' + article.title + '</div><div class="newsPublishedDate"> Author: ' + article.author  + '</div><div class="newsDescription">' + article.body +'</div></div>';             
-    })
-
-    document.getElementById('newsSection').innerHTML = html;
+     
+     let articles = <ArticlesComponent.ArticlesComponent articles={data}/>;
+     ReactDOM.render(articles,document.getElementById('newsSection'));
     })
 
 	}
@@ -62,9 +63,22 @@
           data : JSON.stringify(article)
         });
     }
+
+      renderWelcomeBanner(){                 
+        let element = <WelcomeComponent.WelcomeComponent/>;
+        ReactDOM.render(element,document.getElementById('welcomeBanner'));
+      }
+
+    renderArticleArea(){
+      let articleArea = <ArticleTextboxAreaComponent.ArticleTextboxAreaComponent areas={['Title','Author','Body','Comment']}/>
+      ReactDOM.render(articleArea,document.getElementById('addArticleArea'));
+    }
+
 	}
 
 module.exports = News;
+
+
 
 
 
